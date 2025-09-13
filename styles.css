@@ -1,3 +1,11 @@
+/* Increase line/paragraph spacing in the output textbox */
+#output {
+  line-height: 2.2;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  font-size: 1.08em;
+  white-space: pre-wrap;
+}
 :root{
   --bg: #0b0f14;
   --card: #0f1621;

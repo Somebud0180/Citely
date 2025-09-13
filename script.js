@@ -71,9 +71,13 @@
 
   function runSort(){
   const entries = splitCitations(input.value);
-  const maybeDeduped = removeDupesEl && removeDupesEl.checked ? dedupePreserveOrder(entries) : entries;
+  // Only keep lines containing citations (e.g., [1], (Smith, 2020), etc.)
+  // Adjust regex as needed for your citation style
+  const citationRegex = /\[(\d+)\]|\(([^)]+,\s*\d{4})\)/;
+  const filtered = entries.filter(line => citationRegex.test(line));
+  const maybeDeduped = removeDupesEl && removeDupesEl.checked ? dedupePreserveOrder(filtered) : filtered;
   const maybeFixed = autoFixApaEl && autoFixApaEl.checked ? maybeDeduped.map(autoFixApaBasics) : maybeDeduped;
-  const removedDupes = entries.length - maybeDeduped.length;
+  const removedDupes = filtered.length - maybeDeduped.length;
   const sorted = sortCitations(maybeFixed, {
       ignoreArticles: !!ignoreArticlesEl.checked,
       caseInsensitive: !!caseInsensitiveEl.checked
@@ -86,7 +90,8 @@
     }else{
       output.hidden = false;
       if(outputRich) outputRich.hidden = true;
-      output.value = sorted.join('\n');
+  // Just join lines normally; spacing will be handled by CSS
+  output.value = sorted.join('\n');
       if(outputRich) outputRich.innerHTML = '';
     }
     const has = sorted.length > 0;
