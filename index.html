@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Citely — Alphabetize Citations</title>
+  <meta name="description" content="Paste citations in bulk, sort alphabetically, and copy the results." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>Citely</h1>
+    <p class="tagline">Paste. Sort. Copy.</p>
+  </header>
+
+  <main class="container card">
+    <section class="controls">
+      <label for="input">Your citations</label>
+      <textarea id="input" placeholder="Paste citations here — one per line. We'll also try to split by bullets, semicolons, and numbered lists." rows="10"></textarea>
+
+      <div class="options">
+        <label class="toggle">
+          <input type="checkbox" id="ignoreArticles" checked />
+          <span>Ignore leading articles (A, An, The)</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="caseInsensitive" checked />
+          <span>Case-insensitive sort</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="removeDupes" checked />
+          <span>Remove duplicates</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="autoFixApa" />
+          <span>Auto-fix APA 7 basics</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="formatRefList" />
+          <span>Format as reference list (hanging indent)</span>
+        </label>
+      </div>
+
+      <div class="buttons">
+        <button id="sortBtn" class="primary">Alphabetize</button>
+        <button id="clearBtn" class="ghost">Clear</button>
+        <button id="checkApaBtn" class="secondary">Check APA 7</button>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="results-header">
+        <h2>Sorted citations</h2>
+        <div class="results-actions">
+          <button id="copyBtn" class="secondary" disabled>Copy</button>
+          <button id="downloadBtn" class="secondary" disabled>Download .txt</button>
+        </div>
+      </div>
+  <textarea id="output" rows="10" readonly placeholder="Sorted results appear here"></textarea>
+  <div id="outputRich" class="ref-list" hidden aria-label="Formatted reference list (read-only)"></div>
+      <div id="stats" class="stats" aria-live="polite"></div>
+      <details id="apaReport" class="apa-report" hidden>
+        <summary>APA 7 report</summary>
+        <ul id="apaIssues"></ul>
+      </details>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>Citely works entirely in your browser. No data leaves your device.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
